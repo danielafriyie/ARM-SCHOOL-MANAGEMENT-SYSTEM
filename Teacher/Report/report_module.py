@@ -258,13 +258,13 @@ class ClassWindow(Frame):
         self.subjects_scroll.pack(side=LEFT, fill=Y)
         self.subjects.configure(yscrollcommand=self.subjects_scroll.set)
 
-        self.cols = ('s_no', 's_name', 't_s', 'pos')
-        self.headings = ('Student No', 'Student Name', 'Total Score', 'Position')
+        self.cols = ('s_name', 't_s', 'pos')
+        self.headings = ('Student Name', 'Total Score', 'Position')
         self.subjects.config(columns=self.cols)
         for col in self.cols:
-            if col == 's_no':
-                self.col_width = 100
-            elif col == 's_name':
+            # if col == 's_no':
+            #     self.col_width = 100
+            if col == 's_name':
                 self.col_width = 200
             elif col == 't_s':
                 self.col_width = 100
@@ -275,8 +275,8 @@ class ClassWindow(Frame):
         for col in self.cols:
             self.subjects.heading(col, text=self.headings[counter])
             counter += 1
-        self.subjects.column('#0', width=80)
-        self.subjects.heading('#0', text='ID')
+        self.subjects.column('#0', width=100, anchor=CENTER)
+        self.subjects.heading('#0', text='Student No')
 
     def search_btn_command(self):
         try:
@@ -292,11 +292,12 @@ class ClassWindow(Frame):
             results = A_S_M_S_D.rep_cls(self.c_code_entry.get(), self.term_entry.get(), self.year_entry.get())
             if results:
                 for data in results:
-                    self.subjects.insert('', END, data[0], text=data[0])
-                    self.subjects.set(data[0], self.cols[0], data[1])
-                    self.subjects.set(data[0], self.cols[1], data[2])
-                    self.subjects.set(data[0], self.cols[2], round(data[3], 2))
-                    self.subjects.set(data[0], self.cols[3], pos)
+                    # print(data)
+                    self.subjects.insert('', END, data[1], text=data[1])
+                    # self.subjects.set(data[0], self.cols[0], data[1])
+                    self.subjects.set(data[1], self.cols[0], data[2])
+                    self.subjects.set(data[1], self.cols[1], round(data[3], 2))
+                    self.subjects.set(data[1], self.cols[2], pos)
                     pos += 1
             else:
                 mbx.showinfo('Error', "What you searched for does not exist in the database!")
@@ -318,11 +319,12 @@ class ClassWindow(Frame):
             results = A_S_M_S_D.rep_cls(self.c_code_entry.get(), self.term_entry.get(), self.year_entry.get())
             if results:
                 for data in results:
-                    self.subjects.insert('', END, data[0], text=data[0])
-                    self.subjects.set(data[0], self.cols[0], data[1])
-                    self.subjects.set(data[0], self.cols[1], data[2])
-                    self.subjects.set(data[0], self.cols[2], round(data[3], 2))
-                    self.subjects.set(data[0], self.cols[3], pos)
+                    # print(data)
+                    self.subjects.insert('', END, data[1], text=data[1])
+                    # self.subjects.set(data[0], self.cols[0], data[1])
+                    self.subjects.set(data[1], self.cols[0], data[2])
+                    self.subjects.set(data[1], self.cols[1], round(data[3], 2))
+                    self.subjects.set(data[1], self.cols[2], pos)
                     pos += 1
             else:
                 mbx.showinfo('Error', "What you searched for does not exist in the database!")
