@@ -108,7 +108,7 @@ class ScoresModuleWindow(Frame):
         self.date_entry.insert(END, dt.today().date())
         self.date_entry.grid(row=1, column=2, sticky=NW)
 
-        self.year = Label(self.credentials_frame, text='Date', font=self.TNF, bg='green', fg='white')
+        self.year = Label(self.credentials_frame, text='Year', font=self.TNF, bg='green', fg='white')
         self.year.grid(row=2, column=1, sticky=NW, padx=20)
         self.year_entry = ttk.Entry(self.credentials_frame, font=self.ENF)
         self.year_entry.delete(0, END)
