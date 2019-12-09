@@ -313,9 +313,10 @@ class ArmDatabase:
             self.cursor.execute('DELETE FROM scores WHERE id=?', (__id,))
             self.connection.commit()
 
-        def sco_update(self, __id, sub, term, c_score, e_score, t_score):
-            self.cursor.execute('UPDATE scores SET subject=?, term=?, c_score=?, e_score=?, t_score=? WHERE id=?', (
-                sub, term, c_score, e_score, t_score, __id))
+        def sco_update(self, __id, sub, term, c_score, e_score, t_score, year):
+            self.cursor.execute('UPDATE scores SET subject=?, term=?, c_score=?, e_score=?, t_score=?, year=? '
+                                'WHERE id=?', (
+                                    sub, term, c_score, e_score, t_score, year, __id))
             self.connection.commit()
 
         def sco_std_data(self, s_no):
@@ -325,14 +326,16 @@ class ArmDatabase:
         #############################################
         #           REPORT MODULE
         #############################################
-        def rep_std(self, term, s_no):
+        def rep_std(self, term, s_no, year, cls):
             # Temporary table for storing student results
             self.cursor.execute('DROP TABLE IF EXISTS s_results')
             self.cursor.execute(
                 'CREATE TABLE s_results AS SELECT id, s_name, s_no, subject, term, c_score, e_score, t_score, '
-                'RANK () OVER (PARTITION BY subject ORDER BY t_score DESC) position FROM scores;'
+                'RANK () OVER (PARTITION BY subject ORDER BY t_score DESC) position '
+                'FROM scores WHERE year=? AND term=? AND cls=?'
+                , (year, term, cls)
             )
-            self.cursor.execute('SELECT * FROM s_results WHERE s_no=? AND term=?', (s_no, term))
+            self.cursor.execute('SELECT * FROM s_results WHERE s_no=?', (s_no,))
             return self.cursor.fetchall()
 
         def rep_std_details(self, s_no):

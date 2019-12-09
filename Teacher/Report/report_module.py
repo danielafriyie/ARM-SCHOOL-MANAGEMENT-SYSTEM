@@ -232,9 +232,12 @@ class ClassWindow(Frame):
         self.term_entry.bind('<Return>', self.search_command)
         self.term_entry.grid(row=1, column=3, padx=5)
 
-        self.c_code = Label(self.c_frame, text='Enter Class Code', font=self.LFF, bg='green', fg='white')
+        cls = A_S_M_S_D.std_cls()
+        cls.insert(0, '')
+        self.c_code = Label(self.c_frame, text='Class', font=self.LFF, bg='green', fg='white')
         self.c_code.grid(row=1, column=4, sticky=W)
-        self.c_code_entry = ttk.Entry(self.c_frame, font=self.LFF, width=10)
+        self.c_code_entry = ttk.Combobox(self.c_frame, font=self.LFF, width=5, state='readonly')
+        self.c_code_entry['values'] = cls
         self.c_code_entry.bind('<Return>', self.search_command)
         self.c_code_entry.grid(row=1, column=5, padx=5)
 
@@ -358,7 +361,7 @@ class StudentWindow(Frame):
         self.d_frame.pack(expand=True, fill=BOTH)
 
         self.img_label = Label(self.c_frame, image=self.std_img, bg='green')
-        self.img_label.grid(row=0, column=0, rowspan=5)
+        self.img_label.grid(row=0, column=0, rowspan=6)
 
         self.term = Label(self.c_frame, text='Select Term', font=self.LFF, bg='green', fg='white')
         self.term.grid(row=1, column=1, sticky=W)
@@ -366,21 +369,34 @@ class StudentWindow(Frame):
         self.term_entry['values'] = ['Term 1', 'Term 2', 'Term 3']
         self.term_entry.grid(row=1, column=2, padx=5)
 
+        self.year = Label(self.c_frame, text='Enter Year', font=self.LFF, bg='green', fg='white')
+        self.year.grid(row=2, column=1, sticky=W)
+        self.year_entry = ttk.Entry(self.c_frame, font=self.LFF, width=40)
+        self.year_entry.delete(0, END)
+        self.year_entry.insert(END, dt.today().date().year)
+        self.year_entry.grid(row=2, column=2, padx=5)
+
+        cls = A_S_M_S_D.std_cls()
+        cls.insert(0, '')
+        self.cls = Label(self.c_frame, text='Class', font=self.LFF, bg='green', fg='white')
+        self.cls.grid(row=3, column=1, sticky=W)
+        self.cls_entry = ttk.Combobox(self.c_frame, font=self.LFF, width=38, state='readonly')
+        self.cls_entry['values'] = cls
+        self.cls_entry.grid(row=3, column=2, padx=5)
+
         self.s_no = Label(self.c_frame, text='Enter Student No', font=self.LFF, bg='green', fg='white')
-        self.s_no.grid(row=2, column=1, sticky=W)
+        self.s_no.grid(row=4, column=1, sticky=W)
         self.s_no_entry = ttk.Entry(self.c_frame, font=self.LFF, width=40)
         self.s_no_entry.bind('<Return>', self.search_command)
-        self.s_no_entry.grid(row=2, column=2, padx=5)
+        self.s_no_entry.grid(row=4, column=2, padx=5)
+
+        self.search_btn = ttk.Button(self.c_frame, text='Search', width=15, command=self.search_btn_command)
+        self.search_btn.grid(row=4, column=3)
 
         self.s_name = Label(self.c_frame, text='Student Name', font=self.LFF, bg='green', fg='white')
-        self.s_name.grid(row=3, column=1, sticky=W)
+        self.s_name.grid(row=5, column=1, sticky=W)
         self.s_name_entry = ttk.Entry(self.c_frame, font=self.LFF, width=40)
-        self.s_name_entry.grid(row=3, column=2, padx=5)
-
-        self.cls = Label(self.c_frame, text='Class', font=self.LFF, bg='green', fg='white')
-        self.cls.grid(row=4, column=1, sticky=W)
-        self.cls_entry = ttk.Entry(self.c_frame, font=self.LFF, width=40)
-        self.cls_entry.grid(row=4, column=2, padx=5)
+        self.s_name_entry.grid(row=5, column=2, padx=5)
 
         # pos = Label(c_frame, text='Position', font=self.LFF, bg='green', fg='white')
         # pos.grid(row=4, column=1, sticky=W)
@@ -421,14 +437,48 @@ class StudentWindow(Frame):
     def search_command(self, event):
         try:
             self.s_name_entry.delete(0, END)
-            self.cls_entry.delete(0, END)
+            # self.cls_entry.delete(0, END)
             for children in self.subjects.get_children():
                 self.subjects.delete(children)
             if self.term_entry.get():
                 for data in A_S_M_S_D.rep_std_details(self.s_no_entry.get().title()):
-                    self.cls_entry.insert(END, data[1])
+                    # self.cls_entry.insert(END, data[1])
                     self.s_name_entry.insert(END, data[0])
-                for data in A_S_M_S_D.rep_std(self.term_entry.get(), self.s_no_entry.get().title()):
+                for data in A_S_M_S_D.rep_std(
+                        self.term_entry.get(), self.s_no_entry.get().title(),
+                        self.year_entry.get(), self.cls_entry.get()
+                ):
+                    self.subjects.insert('', END, data[0], text=data[0])
+                    self.subjects.set(data[0], self.cols[0], data[3])
+                    self.subjects.set(data[0], self.cols[2], data[5])
+                    self.subjects.set(data[0], self.cols[3], data[6])
+                    self.subjects.set(data[0], self.cols[4], data[7])
+                    self.subjects.set(data[0], self.cols[5], data[8])
+                    for sub in A_S_M_S_D.rep_sub_name(data[3]):
+                        self.subjects.set(data[0], self.cols[1], sub[0])
+            else:
+                mbx.showinfo('', "Select Term")
+        except TclError:
+            mbx.showinfo('Error', "Unexpected error, please try again")
+            raise
+        except Exception:
+            mbx.showinfo('Error', "Unexpected error, please try again")
+            raise
+
+    def search_btn_command(self):
+        try:
+            self.s_name_entry.delete(0, END)
+            # self.cls_entry.delete(0, END)
+            for children in self.subjects.get_children():
+                self.subjects.delete(children)
+            if self.term_entry.get():
+                for data in A_S_M_S_D.rep_std_details(self.s_no_entry.get().title()):
+                    # self.cls_entry.insert(END, data[1])
+                    self.s_name_entry.insert(END, data[0])
+                for data in A_S_M_S_D.rep_std(
+                        self.term_entry.get(), self.s_no_entry.get().title(),
+                        self.year_entry.get(), self.cls_entry.get()
+                ):
                     self.subjects.insert('', END, data[0], text=data[0])
                     self.subjects.set(data[0], self.cols[0], data[3])
                     self.subjects.set(data[0], self.cols[2], data[5])

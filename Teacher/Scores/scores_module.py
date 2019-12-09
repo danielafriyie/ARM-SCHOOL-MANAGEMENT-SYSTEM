@@ -176,29 +176,31 @@ class ScoresModuleWindow(Frame):
         self.details.bind('<<TreeviewSelect>>', self.scores_row)
 
         # ================= Treeview Column names and headings ===============
-        self.columns = ('date', 'name', 's_no', 'cls', 'subj', 'term', 'c_score', 'e_score', 't_score')
-        self.headings = ('Date', 'Student Name', 'Student Number', 'Class', 'Subject', 'Term', 'Class Score',
+        self.columns = ('date', 'year', 'name', 's_no', 'cls', 'subj', 'term', 'c_score', 'e_score', 't_score')
+        self.headings = ('Date', 'Year', 'Student Name', 'Student Number', 'Class', 'Subject', 'Term', 'Class Score',
                          'Exam Score', 'Total Score')
         self.details.config(columns=self.columns)
         for col in self.columns:
             if col == 'date':
-                self.col_width = 75
+                self.col_width = 70
+            elif col == 'year':
+                self.col_width = 50
             elif col == "name":
                 self.col_width = 200
             elif col == "s_no":
-                self.col_width = 80
+                self.col_width = 75
             elif col == "cls":
-                self.col_width = 50
+                self.col_width = 40
             elif col == 'subj':
                 self.col_width = 100
             elif col == 'term':
                 self.col_width = 75
             elif col == "c_score":
-                self.col_width = 80
+                self.col_width = 75
             elif col == 'e_score':
-                self.col_width = 80
+                self.col_width = 75
             elif col == 't_score':
-                self.col_width = 80
+                self.col_width = 75
             self.details.column(col, width=self.col_width, anchor=CENTER)
         counter = 0
         for col in self.columns:
@@ -295,7 +297,8 @@ class ScoresModuleWindow(Frame):
                     self.term_entry.get(),
                     self.c_score_entry.get(),
                     self.e_score_entry.get(),
-                    (float(self.c_score_entry.get()) + float(self.e_score_entry.get()))
+                    (float(self.c_score_entry.get()) + float(self.e_score_entry.get())),
+                    self.year_entry.get()
                 )
                 mbx.showinfo('', 'Updated successfully')
                 self.date_entry.delete(0, END)
@@ -323,14 +326,15 @@ class ScoresModuleWindow(Frame):
             for data in A_S_M_S_D.sco_refresh():
                 self.details.insert('', END, data[0], text=data[0])
                 self.details.set(data[0], self.columns[0], data[1])
-                self.details.set(data[0], self.columns[1], data[2])
-                self.details.set(data[0], self.columns[2], data[3])
-                self.details.set(data[0], self.columns[3], data[4])
-                self.details.set(data[0], self.columns[4], data[5])
-                self.details.set(data[0], self.columns[5], data[6])
-                self.details.set(data[0], self.columns[6], data[7])
-                self.details.set(data[0], self.columns[7], data[8])
-                self.details.set(data[0], self.columns[8], data[9])
+                self.details.set(data[0], self.columns[1], data[10])
+                self.details.set(data[0], self.columns[2], data[2])
+                self.details.set(data[0], self.columns[3], data[3])
+                self.details.set(data[0], self.columns[4], data[4])
+                self.details.set(data[0], self.columns[5], data[5])
+                self.details.set(data[0], self.columns[6], data[6])
+                self.details.set(data[0], self.columns[7], data[7])
+                self.details.set(data[0], self.columns[8], data[8])
+                self.details.set(data[0], self.columns[9], data[9])
                 # for sub in A_S_M_S_D.tim_sub_name(data[5]):
                 #     self.details.set(data[0], self.columns[4], sub[0])
         except Exception:
@@ -406,14 +410,15 @@ class ScoresModuleWindow(Frame):
             for s_data in A_S_M_S_D.sco_std_data(index[0]):
                 self.details.insert('', END, s_data[0], text=s_data[0])
                 self.details.set(s_data[0], self.columns[0], s_data[1])
-                self.details.set(s_data[0], self.columns[1], s_data[2])
-                self.details.set(s_data[0], self.columns[2], s_data[3])
-                self.details.set(s_data[0], self.columns[3], s_data[4])
-                self.details.set(s_data[0], self.columns[4], s_data[5])
-                self.details.set(s_data[0], self.columns[5], s_data[6])
-                self.details.set(s_data[0], self.columns[6], s_data[7])
-                self.details.set(s_data[0], self.columns[7], s_data[8])
-                self.details.set(s_data[0], self.columns[8], s_data[9])
+                self.details.set(s_data[0], self.columns[1], s_data[10])
+                self.details.set(s_data[0], self.columns[2], s_data[2])
+                self.details.set(s_data[0], self.columns[3], s_data[3])
+                self.details.set(s_data[0], self.columns[4], s_data[4])
+                self.details.set(s_data[0], self.columns[5], s_data[5])
+                self.details.set(s_data[0], self.columns[6], s_data[6])
+                self.details.set(s_data[0], self.columns[7], s_data[7])
+                self.details.set(s_data[0], self.columns[8], s_data[8])
+                self.details.set(s_data[0], self.columns[9], s_data[9])
         except Exception:
             mbx.showinfo('Error', 'Unexpected error, please try again!!')
             raise
@@ -429,6 +434,7 @@ class ScoresModuleWindow(Frame):
             self.e_score_entry.delete(0, END)
             self.e_score_entry_70.delete(0, END)
             self.c_score_entry.delete(0, END)
+            self.year_entry.delete(0, END)
             index = self.details.selection()
             for data in A_S_M_S_D.scores_row(index[0]):
                 self.date_entry.insert(END, data[1])
@@ -439,6 +445,7 @@ class ScoresModuleWindow(Frame):
                 self.term_entry.set(data[6])
                 self.e_score_entry.insert(END, data[8])
                 self.c_score_entry.insert(END, data[7])
+                self.year_entry.insert(END, data[10])
 
         except Exception:
             mbx.showinfo('Error', 'Unexpected error, please try again!!')
