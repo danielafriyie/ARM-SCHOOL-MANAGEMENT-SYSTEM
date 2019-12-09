@@ -39,7 +39,7 @@ class ArmSchoolMgtSys(Frame):
         # self.master.geometry("%dx%d+0+0" % (w, h-50))
         # self.master.maxsize()
         self.master.state('zoomed')
-        # self.master.protocol('WM_DELETE_WINDOW', self.exit_command)
+        self.master.protocol('WM_DELETE_WINDOW', self.exit_command)
 
         # Fonts
         self.ALG = ("News701 BT", 10, 'bold')
