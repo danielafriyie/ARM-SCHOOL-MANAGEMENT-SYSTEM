@@ -27,7 +27,7 @@ class TimeTableModuleWindow(Frame):
         self.ENF = ('courier', 12, 'bold')
 
         self.time_image = PhotoImage(
-            file='Admin\\TimeTableModule\\timetable.png')
+            file='images\\timetable.png')
         self.time_image_label = Label(self.credentials_frame, image=self.time_image, bg='green')
         self.time_image_label.grid(row=0, column=0, rowspan=7)
 

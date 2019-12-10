@@ -35,7 +35,7 @@ class TeachersModuleWindow(Frame):
         # self.access_rights_frame.pack(fill=BOTH)
 
         # User Credentials
-        self.teachers_image = PhotoImage(file='Admin\\TeachersModule\\image.png').subsample(3, 2)
+        self.teachers_image = PhotoImage(file='images\\teacher.png').subsample(3, 2)
         self.teachers_image_label = ttk.Label(self.credentials_frame, image=self.teachers_image, background='green',
                                               foreground='white')
         self.teachers_image_label.grid(row=0, column=0, rowspan=13, padx=20, )

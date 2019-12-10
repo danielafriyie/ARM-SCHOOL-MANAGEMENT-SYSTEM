@@ -97,7 +97,7 @@ class ScoresModuleWindow(Frame):
 
         # Student credentials
         self.image = PhotoImage(
-            file='Teacher\\Scores\\img.png')
+            file='images\\sco.png')
         self.image_label = Label(self.credentials_frame, image=self.image, bg='green')
         self.image_label.grid(row=0, column=0, rowspan=9)
 

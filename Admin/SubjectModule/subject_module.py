@@ -3,7 +3,6 @@ from tkinter import ttk
 from datetime import datetime as dt
 from Main_Window import database
 from tkinter import messagebox as mbx
-from sqlite3 import IntegrityError, Error
 
 A_S_M_S_D = database.ArmDatabase('armdata.db')
 
@@ -28,7 +27,7 @@ class SubjectModuleWindow(Frame):
         self.ENF = ('courier', 12, 'bold')
 
         self.time_image = PhotoImage(
-            file='Admin\\SubjectModule\\subject.png')
+            file='images\\subject.png')
         self.time_image_label = Label(self.credentials_frame, image=self.time_image, bg='green')
         self.time_image_label.grid(row=0, column=0, rowspan=4)
 

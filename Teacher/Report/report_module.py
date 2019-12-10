@@ -348,7 +348,7 @@ class StudentWindow(Frame):
         self.font = ('Times New Roman', 15)
 
         # Images
-        self.std_img = PhotoImage(file='Teacher\\Report\\cls.jpg')
+        self.std_img = PhotoImage(file='images\\rep.jpg')
 
         self.frame = Frame(self.master, bg='light green')
         self.frame.pack(expand=True, fill=BOTH)

@@ -18,7 +18,7 @@ class ClassListModuleWindow(Frame):
 
         self.ENF = ('courier', 12, 'bold')
 
-        self.image = PhotoImage(file='Teacher\\ClassList\\img.jpg')
+        self.image = PhotoImage(file='images\\class.jpg')
         self.img_label = Label(self.search_frame, image=self.image, bg='green')
         self.img_label.grid(row=0, column=0, rowspan=6)
 

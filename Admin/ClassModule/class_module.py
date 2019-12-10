@@ -44,7 +44,7 @@ class ClassModuleWindow(Frame):
         self.ENF = ('courier', 12, 'bold')
 
         self.class_image = PhotoImage(
-            file='Admin\\ClassModule\\class_icon.png')
+            file='images\\class_icon.png')
         self.class_image_label = Label(self.credentials_frame, image=self.class_image, bg='green')
         self.class_image_label.grid(row=0, column=0, rowspan=7)
 

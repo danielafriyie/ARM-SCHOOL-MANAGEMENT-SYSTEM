@@ -33,11 +33,7 @@ class ArmSchoolMgtSys(Frame):
     def __init__(self, master):
         Frame.__init__(self, master)
         self.master.title(__app_name__ + " " + __version__)
-        # self.screen_width = self.master.winfo_screenmmwidth()
-        # self.screen_height = self.master.winfo_screenheight()
-        # w, h = self.master.winfo_screenwidth(), self.master.winfo_screenheight()
-        # self.master.geometry("%dx%d+0+0" % (w, h-50))
-        # self.master.maxsize()
+        self.master.iconbitmap(default="images\\favicon.ico")
         self.master.state('zoomed')
         self.master.protocol('WM_DELETE_WINDOW', self.exit_command)
 
@@ -46,6 +42,7 @@ class ArmSchoolMgtSys(Frame):
         self.TTF = ('algerian', 30)
         self.CUF = ('MV Boli', 15)
         self.LFF = ('Arial', 10)
+        self.BGL = ('News701 BT', 50)
 
         # Toolbar Frame
         self.toolbar = Frame(master, bg='green')
@@ -69,13 +66,18 @@ class ArmSchoolMgtSys(Frame):
         self.interaction_window.pack(side=LEFT, anchor=W, expand=True, fill=BOTH)
         self.__active_module = {'current-module': ''}
 
-        # Background Image
-        self.main_image = PhotoImage(file='Main_Window\\main.png').subsample(1, 1)
+        # Background Image / Label
+        # self.main_image = PhotoImage(file='Main_Window\\t_logo.png').subsample(1, 1)
         self.window_frame = Frame(self.interaction_window)
-        self.window_frame.pack()
-        self.background_image = Label(self.window_frame, text="Background Image", image=self.main_image)
-        self.background_image.image = self.main_image
-        self.background_image.pack(expand=True, fill=BOTH)
+        self.window_frame.pack(expand=True, fill=BOTH)
+        # self.background_image = Label(self.window_frame, text="Background Image", image=self.main_image)
+        # self.background_image.image = self.main_image
+        # self.background_image.pack(expand=True, fill=BOTH)
+        self.background_label = Label(self.window_frame,
+                                      text='ARM SCHOOL MANAGEMENT SYSTEM\n\nINFUSED WITH\n\n'
+                                           'ABOVE\n\nTOMORROW\n\nAND BEYOND',
+                                      bg='green', fg='white', font=self.BGL)
+        self.background_label.pack(expand=True, fill=BOTH)
 
         # Admin Panel Frame
         self.admin_frame = LabelFrame(self.nav_pane, text='Administrator', font=self.LFF,
@@ -295,6 +297,7 @@ class ArmSchoolMgtSys(Frame):
         self.active_module_func()
 
     ''' ACTIVE MODULE FUNCTION '''
+
     def active_module_func(self):
         """
 

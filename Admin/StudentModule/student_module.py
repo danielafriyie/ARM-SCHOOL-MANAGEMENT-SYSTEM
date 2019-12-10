@@ -34,7 +34,7 @@ class StudentModuleWindow(Frame):
         # self.access_rights_frame.pack(fill=BOTH)
 
         # User Credentials
-        self.image = PhotoImage(file='Admin\\StudentModule\\image.png')
+        self.image = PhotoImage(file='images\\image.png')
         self.image_label = ttk.Label(self.credentials_frame, image=self.image, background='green',
                                      foreground='white')
         self.image_label.grid(row=0, column=0, rowspan=20, padx=20, )

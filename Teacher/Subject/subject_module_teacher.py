@@ -18,7 +18,7 @@ class SubjectModuleWindow(Frame):
 
         self.ENF = ('courier', 12, 'bold')
 
-        self.image = PhotoImage(file='Teacher\\Subject\\img.png')
+        self.image = PhotoImage(file='images\\sub.png')
         self.img_label = Label(self.search_frame, image=self.image, bg='green')
         self.img_label.grid(row=0, column=0, rowspan=6)
 
