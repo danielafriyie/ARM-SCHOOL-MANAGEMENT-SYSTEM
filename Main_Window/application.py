@@ -64,28 +64,31 @@ class ArmSchoolMgtSys(Frame):
         # Interaction Window Frame
         self.interaction_window = LabelFrame(master, bg='light green', font=self.LFF)
         self.interaction_window.pack(side=LEFT, anchor=W, expand=True, fill=BOTH)
+        # Set Subject as the default home module
+        self.interaction_window.config(text='Subject Module')
+        subject_module.SubjectModuleWindow(self.interaction_window)
         self.__active_module = {'current-module': ''}
 
         # Background Image / Label
         # self.main_image = PhotoImage(file='Main_Window\\t_logo.png').subsample(1, 1)
-        self.window_frame = Frame(self.interaction_window)
-        self.window_frame.pack(expand=True, fill=BOTH)
+        # self.window_frame = Frame(self.interaction_window)
+        # self.window_frame.pack(expand=True, fill=BOTH)
         # self.background_image = Label(self.window_frame, text="Background Image", image=self.main_image)
         # self.background_image.image = self.main_image
         # self.background_image.pack(expand=True, fill=BOTH)
-        self.background_label = Label(self.window_frame,
-                                      text='ARM SCHOOL MANAGEMENT SYSTEM\n\nINFUSED WITH\n\n'
-                                           'ABOVE\n\nTOMORROW\n\nAND BEYOND',
-                                      bg='green', fg='white', font=self.BGL)
-        self.background_label.pack(expand=True, fill=BOTH)
+        # self.background_label = Label(self.window_frame,
+        #                               text='ARM SCHOOL MANAGEMENT SYSTEM\n\nINFUSED WITH\n\n'
+        #                                    'ABOVE\n\nTOMORROW\n\nAND BEYOND',
+        #                               bg='green', fg='white', font=self.BGL)
+        # self.background_label.pack(expand=True, fill=BOTH)
 
         # Admin Panel Frame
-        self.admin_frame = LabelFrame(self.nav_pane, text='Administrator', font=self.LFF,
+        self.admin_frame = LabelFrame(self.nav_pane, font=self.LFF,
                                       bg='light green', fg='black')
         self.admin_frame.pack(expand=True, fill=Y)
 
         # Teacher Panel Frame
-        self.teacher_frame = LabelFrame(self.nav_pane, text='Teacher', font=self.LFF,
+        self.teacher_frame = LabelFrame(self.nav_pane, font=self.LFF,
                                         bg='light green', fg='black')
         self.teacher_frame.pack(expand=True, fill=Y)
 
@@ -133,7 +136,7 @@ class ArmSchoolMgtSys(Frame):
         self.time_table.pack(expand=True, fill=Y)
 
         self.subjects = Button(self.admin_frame, text='Add/Edit Subjects', width=14, font=self.ALG,
-                               bg='green', fg='white', activebackground='black',
+                               bg='white', fg='green', activebackground='black',
                                activeforeground='#b7f731', relief=FLAT, bd=1, command=self.subject_module_window)
         self.subjects.pack(expand=True, fill=Y)
 
