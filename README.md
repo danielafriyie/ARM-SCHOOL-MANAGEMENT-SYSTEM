@@ -1,16 +1,12 @@
 # ARM SCHOOL MANAGEMENT SYSTEM
 
-A simple yet fast and rich school management system with two available modules (administrator and teacher module) each
-containing five sub-modules under it.
+A simple yet fast and rich school management system. It comes with ten (10) available modules:
 
-## Administrator Module 
 - Teachers
 - Students
 - Add/Edit Class
 - Time Table
 - Add/Edit Subjects
-
-## Teacher Module
 - Class List
 - Scores
 - Class Schedule
