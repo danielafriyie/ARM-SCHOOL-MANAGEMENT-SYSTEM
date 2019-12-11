@@ -1,6 +1,6 @@
 # ARM SCHOOL MANAGEMENT SYSTEM
 
-A simple yet fast and rich school management system. It comes with ten (10) available modules:
+A simple yet fast and rich school management system licensed under MIT. It comes with ten (10) available modules:
 
 - Teachers
 - Students
