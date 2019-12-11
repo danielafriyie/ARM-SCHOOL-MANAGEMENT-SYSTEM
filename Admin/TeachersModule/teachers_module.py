@@ -35,10 +35,10 @@ class TeachersModuleWindow(Frame):
         # self.access_rights_frame.pack(fill=BOTH)
 
         # User Credentials
-        self.teachers_image = PhotoImage(file='images\\teacher.png').subsample(3, 2)
+        self.teachers_image = PhotoImage(file='images\\teacher.png').subsample(4, 2)
         self.teachers_image_label = ttk.Label(self.credentials_frame, image=self.teachers_image, background='green',
                                               foreground='white')
-        self.teachers_image_label.grid(row=0, column=0, rowspan=13, padx=20, )
+        self.teachers_image_label.grid(row=0, column=0, rowspan=13, padx=10)
 
         self.TNF = ('Times New Roman', 14)
         self.ENF = ('courier', 12, 'bold')
@@ -114,10 +114,10 @@ class TeachersModuleWindow(Frame):
 
         self.subject_box = Listbox(self.credentials_frame, width=35, height=4, relief=FLAT, font=self.ENF)
         self.subject_box.grid(row=6, column=2, sticky=NW, )
-        self.subject_box_add_btn = ttk.Button(self.credentials_frame, text="Add", width=9
+        self.subject_box_add_btn = ttk.Button(self.credentials_frame, text="Add", width=7
                                               , command=self.subject_box_btn_command)
         self.subject_box_add_btn.grid(row=6, column=4, sticky=N, )
-        self.subject_box_remove_btn = ttk.Button(self.credentials_frame, text="Remove", width=9
+        self.subject_box_remove_btn = ttk.Button(self.credentials_frame, text="Remove", width=7
                                                  , command=self.subject_box_rev_command)
         self.subject_box_remove_btn.grid(row=6, column=4, )
 
@@ -293,7 +293,7 @@ class TeachersModuleWindow(Frame):
         self.add_new_btn = Button(self.btn_frame, text='Add New', relief=FLAT, bg='#000000', fg='#b7f731', width=10,
                                   height=1, font=self.btn_font, activebackground='black',
                                   activeforeground='white', command=self.add_new_btn_command)
-        self.add_new_btn.pack(side=LEFT, padx=10, pady=3)
+        self.add_new_btn.pack(side=LEFT, padx=10)
 
         self.update_btn = Button(self.btn_frame, text='Update', relief=FLAT, bg='#000000', fg='#b7f731', width=10,
                                  height=1, font=self.btn_font, activebackground='black',

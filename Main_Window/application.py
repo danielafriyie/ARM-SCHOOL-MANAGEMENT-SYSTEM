@@ -34,7 +34,8 @@ class ArmSchoolMgtSys(Frame):
         Frame.__init__(self, master)
         self.master.title(__app_name__ + " " + __version__)
         self.master.iconbitmap(default="images\\favicon.ico")
-        self.master.state('zoomed')
+        # self.master.state('zoomed')
+        self.master.geometry('1360x768')
         self.master.protocol('WM_DELETE_WINDOW', self.exit_command)
 
         # Fonts

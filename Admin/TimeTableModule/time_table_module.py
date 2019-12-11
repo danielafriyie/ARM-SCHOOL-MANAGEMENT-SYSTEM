@@ -88,23 +88,23 @@ class TimeTableModuleWindow(Frame):
         self.details.config(columns=self.columns)
         for col in self.columns:
             if col == 'date':
-                col_width = 100
+                self.col_width = 60
             elif col == "t_name":
-                col_width = 300
+                self.col_width = 200
             elif col == "time":
-                col_width = 100
+                self.col_width = 50
             elif col == "day":
-                col_width = 200
+                self.col_width = 80
             elif col == 'subj':
-                col_width =300
+                self.col_width = 100
             elif col == "class":
-                col_width = 200
-            self.details.column(col, width=col_width, anchor=CENTER)
+                self.col_width = 80
+            self.details.column(col, width=self.col_width, anchor=CENTER)
         counter = 0
         for col in self.columns:
             self.details.heading(col, text=self.headings[counter])
             counter += 1
-        self.details.column('#0', width=100, anchor=CENTER)
+        self.details.column('#0', width=20, anchor=CENTER)
         self.details.heading("#0", text="ID")
 
         self.details_scroll = ttk.Scrollbar(self.details_frame)

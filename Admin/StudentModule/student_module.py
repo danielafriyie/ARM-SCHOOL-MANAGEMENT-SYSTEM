@@ -3,6 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox as mbx
 from datetime import datetime as dt
 from Main_Window import database
+from PIL import Image, ImageTk
 
 A_S_M_S_D = database.ArmDatabase('.\\armdata.db')
 
@@ -34,10 +35,12 @@ class StudentModuleWindow(Frame):
         # self.access_rights_frame.pack(fill=BOTH)
 
         # User Credentials
-        self.image = PhotoImage(file='images\\image.png')
-        self.image_label = ttk.Label(self.credentials_frame, image=self.image, background='green',
+        self.image = Image.open('images\\image.png')
+        self.image = self.image.resize((240, 560))
+        self.photoImage = ImageTk.PhotoImage(self.image)
+        self.image_label = ttk.Label(self.credentials_frame, image=self.photoImage, background='green',
                                      foreground='white')
-        self.image_label.grid(row=0, column=0, rowspan=20, padx=20, )
+        self.image_label.grid(row=0, column=0, rowspan=17,)
 
         self.TNF = ('Times New Roman', 14)
         self.ENF = ('courier', 12, 'bold')
@@ -362,7 +365,7 @@ class StudentModuleWindow(Frame):
         self.add_new_btn = Button(self.btn_frame, text='Add New', relief=FLAT, bg='#000000', fg='#b7f731', width=10,
                                   height=1, font=self.btn_font, activebackground='black',
                                   activeforeground='white', command=self.add_new_btn_command)
-        self.add_new_btn.pack(side=LEFT, padx=10, pady=3)
+        self.add_new_btn.pack(side=LEFT, padx=10)
 
         self.update_btn = Button(self.btn_frame, text='Update', relief=FLAT, bg='#000000', fg='#b7f731', width=10,
                                  height=1, font=self.btn_font, activebackground='black',
