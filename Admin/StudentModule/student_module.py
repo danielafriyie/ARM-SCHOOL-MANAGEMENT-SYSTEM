@@ -36,7 +36,7 @@ class StudentModuleWindow(Frame):
 
         # User Credentials
         self.image = Image.open('images\\image.png')
-        self.image = self.image.resize((240, 560))
+        self.image = self.image.resize((240, 500))
         self.photoImage = ImageTk.PhotoImage(self.image)
         self.image_label = ttk.Label(self.credentials_frame, image=self.photoImage, background='green',
                                      foreground='white')

@@ -83,22 +83,26 @@ class TimeTableModuleWindow(Frame):
         self.details.bind("<<TreeviewSelect>>", self.get_selected_row)
 
         # ================= Treeview Column names and headings ===============
-        self.columns = ('date', 't_name', 'time', 'day', 'subj', 'class')
-        self.headings = ('Date', 'Teacher Name', 'Time', 'Day', 'Subject', 'Class')
+        self.columns = ('date', 't_no', 't_name', 'time', 'day', 's_code', 'subj', 'class')
+        self.headings = ('Date', 'Teacher No', 'Teacher Name', 'Time', 'Day', 'Subject Code', 'Subject Name', 'Class')
         self.details.config(columns=self.columns)
         for col in self.columns:
             if col == 'date':
-                self.col_width = 60
-            elif col == "t_name":
-                self.col_width = 200
-            elif col == "time":
                 self.col_width = 50
+            elif col == 't_no':
+                self.col_width = 70
+            elif col == "t_name":
+                self.col_width = 150
+            elif col == "time":
+                self.col_width = 30
             elif col == "day":
-                self.col_width = 80
+                self.col_width = 70
+            elif col == 's_code':
+                self.col_width = 60
             elif col == 'subj':
-                self.col_width = 100
+                self.col_width = 150
             elif col == "class":
-                self.col_width = 80
+                self.col_width = 50
             self.details.column(col, width=self.col_width, anchor=CENTER)
         counter = 0
         for col in self.columns:
@@ -239,15 +243,16 @@ class TimeTableModuleWindow(Frame):
             for data in A_S_M_S_D.tim_view_all():
                 self.details.insert('', END, data[0], text=data[0])
                 self.details.set(data[0], self.columns[0], data[1])
-                # self.details.set(data[0], self.columns[1], data[2])
-                self.details.set(data[0], self.columns[2], data[3])
-                self.details.set(data[0], self.columns[3], data[4])
-                # self.details.set(data[0], self.columns[4], data[5])
-                self.details.set(data[0], self.columns[5], data[6])
+                self.details.set(data[0], self.columns[1], data[2])
+                # self.details.set(data[0], self.columns[2], data[3])
+                self.details.set(data[0], self.columns[3], data[3])
+                self.details.set(data[0], self.columns[4], data[4])
+                self.details.set(data[0], self.columns[5], data[5])
+                self.details.set(data[0], self.columns[7], data[6])
                 for tea in A_S_M_S_D.cls_teacher(data[2]):
-                    self.details.set(data[0], self.columns[1], tea[0])
+                    self.details.set(data[0], self.columns[2], tea[0])
                 for sub in A_S_M_S_D.tim_sub_name(data[5]):
-                    self.details.set(data[0], self.columns[4], sub[0])
+                    self.details.set(data[0], self.columns[6], sub[0])
         except IndexError:
             pass
         except Exception:

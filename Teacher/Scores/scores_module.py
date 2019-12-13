@@ -3,6 +3,7 @@ from tkinter import ttk
 from datetime import datetime as dt
 from Main_Window import database
 from tkinter import messagebox as mbx
+from PIL import Image, ImageTk
 
 A_S_M_S_D = database.ArmDatabase('armdata.db')
 
@@ -57,37 +58,37 @@ class ScoresModuleWindow(Frame):
         self.btn_frame2.pack()
 
         self.add_btn = Button(self.btn_frame2, text='Add New', relief=FLAT, bg='#000000', fg='#b7f731', width=10,
-                              font=self.btn_font, pady=5, activebackground='black',
+                              font=self.btn_font, activebackground='black',
                               activeforeground='white', command=self.add_new_btn_command)
-        self.add_btn.pack(padx=5, side=LEFT, pady=5)
+        self.add_btn.pack(padx=5, side=LEFT)
 
         self.update_btn = Button(self.btn_frame2, text='Update', relief=FLAT, bg='#000000', fg='#b7f731', width=10,
-                                 height=1, font=self.btn_font, pady=5, activebackground='black',
+                                 height=1, font=self.btn_font, activebackground='black',
                                  activeforeground='white', command=self.update_btn_command)
         self.update_btn.pack(padx=5, side=LEFT)
 
         # self.edit_btn = Button(self.details_frame, text='Edit', relief=FLAT, bg='#000000', fg='#b7f731', width=10,
-        #                        height=1, font=self.btn_font, pady=5, activebackground='black',
+        #                        height=1, font=self.btn_font, activebackground='black',
         #                        activeforeground='white')
         # self.edit_btn.pack()
 
         self.refresh_btn = Button(self.btn_frame2, text='Refresh', relief=FLAT, bg='#000000', fg='#b7f731', width=10,
-                                  height=1, font=self.btn_font, pady=5, activebackground='black',
+                                  height=1, font=self.btn_font, activebackground='black',
                                   activeforeground='white', command=self.refresh_btn_command)
         self.refresh_btn.pack(padx=5, side=LEFT)
 
         self.clear_btn = Button(self.btn_frame2, text='Clear', relief=FLAT, bg='#000000', fg='#b7f731', width=10,
-                                height=1, font=self.btn_font, pady=5, activebackground='black',
+                                height=1, font=self.btn_font, activebackground='black',
                                 activeforeground='white', command=self.clear_btn_command)
         self.clear_btn.pack(padx=5, side=LEFT)
 
         self.delete_btn = Button(self.btn_frame2, text='Delete', relief=FLAT, bg='#000000', fg='#b7f731', width=10,
-                                 height=1, font=self.btn_font, pady=5, activebackground='black',
+                                 height=1, font=self.btn_font, activebackground='black',
                                  activeforeground='white', command=self.delete_btn_command)
         self.delete_btn.pack(padx=5, side=LEFT)
 
         self.convert_btn = Button(self.btn_frame2, text='Convert to 70%', relief=FLAT, bg='#000000', fg='#b7f731',
-                                  width=13, height=1, font=self.btn_font, pady=5, activebackground='black',
+                                  width=13, height=1, font=self.btn_font, activebackground='black',
                                   activeforeground='white', command=self.convert_btn_command)
         self.convert_btn.pack(padx=5, side=LEFT)
 
@@ -96,72 +97,73 @@ class ScoresModuleWindow(Frame):
         self.details_frame.pack(fill=BOTH, expand=True)
 
         # Student credentials
-        self.image = PhotoImage(
-            file='images\\sco.png')
-        self.image_label = Label(self.credentials_frame, image=self.image, bg='green')
-        self.image_label.grid(row=0, column=0, rowspan=9)
+        self.image = Image.open('images\\sco.png')
+        self.image = self.image.resize((170, 170))
+        self.photoImage = ImageTk.PhotoImage(self.image)
+        self.image_label = Label(self.credentials_frame, image=self.photoImage, bg='green')
+        self.image_label.grid(row=0, column=0, rowspan=15)
 
         self.date = Label(self.credentials_frame, text='Date', font=self.TNF, bg='green', fg='white')
-        self.date.grid(row=1, column=1, sticky=NW, padx=20)
-        self.date_entry = ttk.Entry(self.credentials_frame, font=self.ENF)
+        self.date.grid(row=1, column=1, sticky=NW, padx=5)
+        self.date_entry = ttk.Entry(self.credentials_frame, font=self.ENF, width=12)
         self.date_entry.delete(0, END)
         self.date_entry.insert(END, dt.today().date())
         self.date_entry.grid(row=1, column=2, sticky=NW)
 
         self.year = Label(self.credentials_frame, text='Year', font=self.TNF, bg='green', fg='white')
-        self.year.grid(row=2, column=1, sticky=NW, padx=20)
-        self.year_entry = ttk.Entry(self.credentials_frame, font=self.ENF)
+        self.year.grid(row=1, column=3, sticky=NW, padx=5)
+        self.year_entry = ttk.Entry(self.credentials_frame, font=self.ENF, width=11)
         self.year_entry.delete(0, END)
         self.year_entry.insert(END, dt.today().date().year)
-        self.year_entry.grid(row=2, column=2, sticky=NW)
+        self.year_entry.grid(row=1, column=4, sticky=NW)
 
         self.name = Label(self.credentials_frame, text='Student Name', font=self.TNF, bg='green', fg='white')
-        self.name.grid(row=3, column=1, sticky=NW, padx=20)
+        self.name.grid(row=2, column=1, sticky=NW, padx=5)
         self.name_entry = ttk.Entry(self.credentials_frame, font=self.ENF, width=35)
-        self.name_entry.grid(row=3, column=2, sticky=NW)
+        self.name_entry.grid(row=2, column=2, sticky=NW, columnspan=7)
 
         self.s_no = Label(self.credentials_frame, text='Student Number', font=self.TNF, bg='green', fg='white')
-        self.s_no.grid(row=4, column=1, sticky=NW, padx=20)
+        self.s_no.grid(row=3, column=1, sticky=NW, padx=5)
         self.s_no_entry = ttk.Entry(self.credentials_frame, width=35, font=self.ENF)
-        self.s_no_entry.grid(row=4, column=2, sticky=NW)
+        self.s_no_entry.grid(row=3, column=2, sticky=NW, columnspan=7)
 
         self.cls = Label(self.credentials_frame, text='Class', font=self.TNF, bg='green', fg='white')
-        self.cls.grid(row=5, column=1, sticky=NW, padx=20)
-        self.cls_entry = ttk.Combobox(self.credentials_frame, state='readonly', font=self.ENF, width=33)
+        self.cls.grid(row=4, column=1, sticky=NW, padx=5)
+        self.cls_entry = ttk.Combobox(self.credentials_frame, state='readonly', font=self.ENF, width=10)
         cls = A_S_M_S_D.std_cls()
         cls.insert(0, '')
         self.cls_entry.config(values=cls)
         self.cls_entry.current(0)
-        self.cls_entry.grid(row=5, column=2, sticky=NW)
+        self.cls_entry.grid(row=4, column=2, sticky=NW)
 
         self.subject = Label(self.credentials_frame, text='Subject', font=self.TNF, bg='green', fg='white')
-        self.subject.grid(row=6, column=1, sticky=NW, padx=20)
-        self.subject_entry = ttk.Combobox(self.credentials_frame, state='readonly', font=self.ENF, width=33)
+        self.subject.grid(row=4, column=3, sticky=NW, padx=5)
+        self.subject_entry = ttk.Combobox(self.credentials_frame, state='readonly', font=self.ENF, width=10)
         sub = A_S_M_S_D.sub_select()
         sub.insert(0, '')
         self.subject_entry.config(values=sub)
         self.subject_entry.current(0)
-        self.subject_entry.grid(row=6, column=2, sticky=NW)
+        self.subject_entry.grid(row=4, column=4, sticky=NW)
 
         self.term = Label(self.credentials_frame, text='Term', font=self.TNF, bg='green', fg='white')
-        self.term.grid(row=7, column=1, sticky=NW, padx=20)
-        self.term_entry = ttk.Combobox(self.credentials_frame, state='readonly', font=self.ENF, width=33)
+        self.term.grid(row=5, column=1, sticky=NW, padx=5)
+        self.term_entry = ttk.Combobox(self.credentials_frame, state='readonly', font=self.ENF, width=10)
         self.term_entry.config(values=['', 'Term 1', 'Term 2', 'Term 3'])
         self.term_entry.current(0)
-        self.term_entry.grid(row=7, column=2, sticky=NW)
+        self.term_entry.grid(row=5, column=2, sticky=NW)
 
         self.c_score = Label(self.credentials_frame, text='Class Score', font=self.TNF, bg='green', fg='white')
-        self.c_score.grid(row=8, column=1, sticky=NW, padx=20)
-        self.c_score_entry = ttk.Entry(self.credentials_frame, font=self.ENF, width=35)
-        self.c_score_entry.grid(row=8, column=2, sticky=NW)
+        self.c_score.grid(row=5, column=3, sticky=NW, padx=5)
+        self.c_score_entry = ttk.Entry(self.credentials_frame, font=self.ENF, width=11)
+        self.c_score_entry.grid(row=5, column=4, sticky=NW)
 
         self.e_score = Label(self.credentials_frame, text='Exam Score', font=self.TNF, bg='green', fg='white')
-        self.e_score.grid(row=9, column=1, sticky=NW, padx=20)
-        self.e_score_entry = ttk.Entry(self.credentials_frame, font=self.ENF, width=15)
-        self.e_score_entry.grid(row=9, column=2, sticky=NW)
+        self.e_score.grid(row=6, column=1, sticky=NW, padx=5)
+        self.e_score_entry = ttk.Entry(self.credentials_frame, font=self.ENF, width=12)
+        self.e_score_entry.grid(row=6, column=2, sticky=NW)
 
-        self.e_score_entry_70 = Listbox(self.credentials_frame, font=self.ENF, width=15, relief=FLAT, height=1)
-        self.e_score_entry_70.grid(row=9, column=2, sticky=NE)
+        self.e_score_entry_70 = Listbox(self.credentials_frame, font=self.ENF, width=22, relief=FLAT, height=1)
+        self.e_score_entry_70.grid(row=6, column=3, sticky=NW, padx=5, columnspan=5)
 
         # self.score_type = Label(self.credentials_frame, text='Score Type', font=self.TNF, bg='green', fg='white')
         # self.score_type.grid(row=8, column=1, sticky=NW, padx=20)

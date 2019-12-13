@@ -108,7 +108,7 @@ class ArmDatabase:
             return self.cursor.fetchall()
 
         def tea_view_all(self):
-            self.cursor.execute('SELECT t_no, name FROM teachers')
+            self.cursor.execute('SELECT t_no, name FROM teachers ORDER BY name')
             return self.cursor.fetchall()
 
         def tea_delete(self, t_no):
@@ -276,7 +276,7 @@ class ArmDatabase:
         #           SCORES MODULE
         ##############################################
         def sco_all_students(self):
-            self.cursor.execute('SELECT s_no, name FROM students')
+            self.cursor.execute('SELECT s_no, name FROM students ORDER BY name')
             return self.cursor.fetchall()
 
         def sco_cls_search(self, code):

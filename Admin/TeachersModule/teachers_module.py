@@ -4,6 +4,7 @@ from tkinter import messagebox as mbx
 from datetime import datetime as dt
 from Main_Window import database
 from sqlite3 import IntegrityError
+from PIL import Image, ImageTk
 
 A_S_M_S_D = database.ArmDatabase('armdata.db')
 
@@ -35,10 +36,12 @@ class TeachersModuleWindow(Frame):
         # self.access_rights_frame.pack(fill=BOTH)
 
         # User Credentials
-        self.teachers_image = PhotoImage(file='images\\teacher.png').subsample(4, 2)
-        self.teachers_image_label = ttk.Label(self.credentials_frame, image=self.teachers_image, background='green',
+        self.image = Image.open('images\\teacher.png')
+        self.image = self.image.resize((220, 465))
+        self.photoImage = ImageTk.PhotoImage(self.image)
+        self.teachers_image_label = ttk.Label(self.credentials_frame, image=self.photoImage, background='green',
                                               foreground='white')
-        self.teachers_image_label.grid(row=0, column=0, rowspan=13, padx=10)
+        self.teachers_image_label.grid(row=0, column=0, rowspan=13)
 
         self.TNF = ('Times New Roman', 14)
         self.ENF = ('courier', 12, 'bold')

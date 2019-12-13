@@ -97,26 +97,28 @@ class ClassModuleWindow(Frame):
         self.details.bind("<<TreeviewSelect>>", self.get_selected_row)
 
         # ================= Treeview Column names and headings ===============
-        self.columns = ('date', 'c_name', 'c_code', 'c_size', 'tea')
-        self.headings = ('Date', 'Class Name', 'Class Code', 'Class Size', 'Class Teacher')
+        self.columns = ('date', 'c_name', 'c_code', 'c_size', 't_no', 'tea')
+        self.headings = ('Date', 'Class Name', 'Class Code', 'Class Size', 'Teacher No', 'Class Teacher')
         self.details.config(columns=self.columns)
         for col in self.columns:
             if col == 'date':
-                col_width = 100
+                self.col_width = 50
             elif col == "c_name":
-                col_width = 100
+                self.col_width = 70
             elif col == "c_code":
-                col_width = 100
+                self.col_width = 70
             elif col == "c_size":
-                col_width = 100
+                self.col_width = 70
+            elif col == 't_no':
+                self.col_width = 70
             elif col == 'tea':
-                col_width = 350
-            self.details.column(col, width=col_width, anchor=CENTER)
+                self.col_width = 150
+            self.details.column(col, width=self.col_width, anchor=CENTER)
         counter = 0
         for col in self.columns:
             self.details.heading(col, text=self.headings[counter])
             counter += 1
-        self.details.column('#0', width=100, anchor=CENTER)
+        self.details.column('#0', width=30, anchor=CENTER)
         self.details.heading("#0", text="Class ID")
 
         self.details_scroll = ttk.Scrollbar(self.detail_frame)
@@ -220,8 +222,9 @@ class ClassModuleWindow(Frame):
                 self.details.set(cls[0], self.columns[1], cls[2])
                 self.details.set(cls[0], self.columns[2], cls[3])
                 self.details.set(cls[0], self.columns[3], cls[6])
+                self.details.set(cls[0], self.columns[4], cls[4])
                 for tea in A_S_M_S_D.cls_teacher(cls[4]):
-                    self.details.set(cls[0], self.columns[4], tea[0])
+                    self.details.set(cls[0], self.columns[5], tea[0])
         except Exception:
             mbx.showinfo('Error', "Couldn't refresh, please try again!")
             raise
